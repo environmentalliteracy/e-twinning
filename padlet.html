@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Padlet Paylaşımları | Dijital Çevre Projesi</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Poppins',sans-serif;
+background:url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2070&auto=format&fit=crop") no-repeat center center/cover;
+min-height:100vh;
+color:white;
+overflow-x:hidden;
+}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);z-index:-1;}
+header{position:fixed;top:0;left:0;width:100%;display:flex;justify-content:space-between;align-items:center;padding:20px 40px;height:90px;background:rgba(0,0,0,0.55);backdrop-filter:blur(6px);z-index:10000;}
+.logo img{height:85px;border-radius:20px;background:rgba(255,255,255,0.12);padding:8px;box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+.logo img:hover{transform:scale(1.05);}
+.navbar{display:flex;gap:25px;}
+.navbar a{text-decoration:none;color:white;font-weight:500;position:relative;}
+.navbar a::after{content:"";position:absolute;width:0%;height:2px;left:0;bottom:-5px;background:white;transition:0.3s;}
+.navbar a:hover::after{width:100%;}
+.page-title{text-align:center;padding-top:140px;padding-bottom:60px;}
+.page-title h1{font-family:'Montserrat',sans-serif;font-size:3.5rem;text-shadow:0 10px 30px rgba(0,0,0,0.7);}
+.teacher-section{width:90%;max-width:1200px;margin:0 auto 80px auto;}
+.teacher-section h2{text-align:center;margin-bottom:20px;font-size:2rem;text-shadow:0 5px 15px rgba(0,0,0,0.5);}
+.student-work{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.student-work img,.student-work .ppt-cover,.student-work .text-card-preview{max-width:500px;height:400px;object-fit:contain;border-radius:15px;box-shadow:0 15px 35px rgba(0,0,0,0.4);cursor:pointer;transition:transform 0.3s ease;}
+.student-work img:hover,.student-work .ppt-cover:hover,.student-work .text-card-preview:hover{transform:scale(1.05);}
+.ppt-cover{position:relative;}
+.ppt-badge{position:absolute;bottom:10px;right:10px;background:rgba(0,0,0,0.7);padding:8px 12px;border-radius:10px;font-weight:600;}
+.text-card-preview{background:rgba(0,0,0,0.65);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:600;padding:20px;border-radius:15px;}
+.ppt-gallery{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);align-items:center;justify-content:center;flex-direction:column;z-index:20000;}
+.ppt-gallery img{max-width:90%;max-height:90%;border-radius:10px;}
+.controls{margin-top:20px;}
+.controls button{font-size:24px;padding:10px 20px;margin:0 10px;cursor:pointer;}
+.close{position:absolute;top:30px;right:40px;font-size:30px;cursor:pointer;color:white;}
+.text-card-modal{background:rgba(0,0,0,0.9);padding:30px;border-radius:15px;max-width:90%;max-height:80%;overflow-y:auto;line-height:1.6;color:white;}
+#lightbox{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:0.3s;z-index:30000;}
+#lightbox.active{opacity:1;visibility:visible;backdrop-filter:blur(6px);}
+#lightbox img{max-width:90%;max-height:90%;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,0.8);}
+#closeLightbox{position:fixed;top:120px;right:120px;font-size:45px;background:rgba(0,0,0,0.6);border-radius:50%;padding:2px 14px;cursor:pointer;}
+@media(max-width:768px){
+header{flex-direction:column;align-items:flex-start;padding:15px 20px;}
+.logo img{height:65px;}
+.page-title h1{font-size:2.3rem;}
+.student-work img,.student-work .ppt-cover,.student-work .text-card-preview{width:45%;height:180px;}
+}
+</style>
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<header>
+<div class="logo">
+<a href="index.html"><img src="logo.jpg.jpeg" alt="Proje Logosu"></a>
+</div>
+<nav class="navbar">
+<a href="index.html">Ana Sayfa</a>
+<a href="karikaturler.html">Karikatürlerimiz</a>
+<a href="iletisim.html">İletişim</a>
+</nav>
+</header>
+
+<div class="page-title"><h1>Öğrencilerin Çalışmaları</h1></div>
+
+<!-- Büşra Öğretmen -->
+<div class="teacher-section">
+<h2>Büşra Öğretmenin Öğrencileri</h2>
+<div class="student-work">
+<div class="ppt-cover" onclick="openGallery()">
+<img src="pSlide1.jpg">
+<div class="ppt-badge">+9</div>
+</div>
+<a href="environmental education.pdf" target="_blank" class="ppt-cover"><img src="EEE.png"><div class="ppt-badge">PDF</div></a>
+<a href="EE.jpg" target="_blank" class="ppt-cover"><img src="EE.jpg"></a>
+</div>
+</div>
+
+<!-- Gamze Öğretmen -->
+<div class="teacher-section">
+<h2>Gamze Öğretmenin Öğrencileri</h2>
+<div class="student-work">
+<img src="gamzeHocaHumanity.png">
+<img src="gamzeHocaHikaye.png">
+<img src="gamzeHocaLiteracy.jpg">
+</div>
+</div>
+
+<!-- Ezgi Öğretmen -->
+<div class="teacher-section">
+<h2>Ezgi Öğretmenin Öğrencileri</h2>
+<div class="student-work">
+<img src="ezgiHocaImg1.jpeg">
+<img src="ezgiHocaImg2.jpeg">
+<img src="ezgiHocaImg3.jpeg">
+<img src="ezgiHocaImg4.jpg">
+</div>
+</div>
+
+<!-- Mükremin Öğretmen -->
+<div class="teacher-section">
+<h2>Mükremin Öğretmenin Öğrencileri</h2>
+<div class="student-work">
+<img src="mukreminHoca1.jpeg">
+<img src="mukreminHoca2.jpeg">
+<img src="mukreminHoca3.jpeg">
+</div>
+</div>
+
+<!-- Pavlinka Öğretmen -->
+<div class="teacher-section">
+<h2>Pavlinka Öğretmenin Öğrencileri</h2>
+<div class="student-work">
+<div class="ppt-cover" onclick="openPavlinkaGallery()">
+<img src="CpavlinkaHoca1.png">
+<div class="ppt-badge">+9</div>
+</div>
+<div class="text-card-preview" onclick="openTextModal('text1')"><p>Air Pollution</p></div>
+<div class="text-card-preview" onclick="openTextModal('text2')"><p>Climate Change and Local Water Bodies</p></div>
+<img src="NpavlinkaHoca1.jpeg">
+<img src="NpavlinkaHoca2.jpeg">
+<img src="NpavlinkaHoca3.jpeg">
+</div>
+</div>
+
+<!-- Sevinç Öğretmen -->
+<div class="teacher-section">
+<h2>Sevinç Öğretmenin Öğrencileri</h2>
+<div class="student-work">
+<img src="sevincHoca1.jpg">
+<img src="sevincHoca2.jpg">
+<img src="sevincHoca3.jpg">
+</div>
+</div>
+
+<!-- Büşra Galerisi -->
+<div id="pptGallery" class="ppt-gallery">
+<span class="close" onclick="closeGallery()">✖</span>
+<img id="slide" src="pSlide1.jpg">
+<div class="controls">
+<button onclick="prevSlide()">◀</button>
+<button onclick="nextSlide()">▶</button>
+</div>
+</div>
+
+<!-- Pavlinka Galerisi -->
+<div id="pavlinkaGallery" class="ppt-gallery">
+<span class="close" onclick="closePavlinkaGallery()">✖</span>
+<img id="pavlinkaSlide" src="CpavlinkaHoca1.png">
+<div class="controls">
+<button onclick="prevPavlinkaSlide()">◀</button>
+<button onclick="nextPavlinkaSlide()">▶</button>
+</div>
+</div>
+
+<!-- Text Modal -->
+<div id="textModal" class="ppt-gallery">
+<span class="close" onclick="closeTextModal()">✖</span>
+<div id="textContent" class="text-card-modal"></div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox">
+<span id="closeLightbox">&times;</span>
+<img id="lightbox-img">
+</div>
+
+<script>
+// Büşra Galerisi
+let slides=["pSlide1.jpg","pSlide2.jpg","pSlide3.jpg","pSlide4.jpg","pSlide5.jpg","pSlide6.jpg","pSlide7.jpg","pSlide8.jpg","pSlide9.jpg","pSlide10.jpg"];
+let current=0;
+function openGallery(){document.getElementById("pptGallery").style.display="flex"; showSlide();}
+function closeGallery(){document.getElementById("pptGallery").style.display="none";}
+function showSlide(){document.getElementById("slide").src=slides[current];}
+function nextSlide(){current++; if(current>=slides.length) current=0; showSlide();}
+function prevSlide(){current--; if(current<0) current=slides.length-1; showSlide();}
+
+// Pavlinka Galerisi
+let pavlinkaSlides=["CpavlinkaHoca1.png","CpavlinkaHoca2.png","CpavlinkaHoca3.png","CpavlinkaHoca4.png","CpavlinkaHoca5.png","CpavlinkaHoca6.png","CpavlinkaHoca7.png","CpavlinkaHoca8.png","CpavlinkaHoca9.png","CpavlinkaHoca10.png"];
+let pavCurrent=0;
+function openPavlinkaGallery(){document.getElementById("pavlinkaGallery").style.display="flex"; showPavlinkaSlide();}
+function closePavlinkaGallery(){document.getElementById("pavlinkaGallery").style.display="none";}
+function showPavlinkaSlide(){document.getElementById("pavlinkaSlide").src=pavlinkaSlides[pavCurrent];}
+function nextPavlinkaSlide(){pavCurrent++; if(pavCurrent>=pavlinkaSlides.length) pavCurrent=0; showPavlinkaSlide();}
+function prevPavlinkaSlide(){pavCurrent--; if(pavCurrent<0) pavCurrent=pavlinkaSlides.length-1; showPavlinkaSlide();}
+
+// Text Modal
+const texts={
+text1:`<h3>Air Pollution</h3>
+<p>Air is invisible, but it is essential for the existence of humans and all living organisms. We cannot live without breathing, and clean air is a basic condition for good health and quality of life. However, in the modern world, air pollution has become one of the most serious global problems. The main sources of pollution are industrial enterprises, automobile transport, and household heating. The burning of coal, oil, and natural gas releases harmful substances such as carbon dioxide, sulfur oxides, nitrogen oxides, and fine particulate matter. These pollutants contaminate the atmosphere and create smog over large cities. In addition, deforestation reduces nature’s ability to purify the air, since trees absorb carbon dioxide and release oxygen. Polluted air has a serious impact on human health. It can cause respiratory diseases, allergies, and heart problems. Children and elderly people are especially vulnerable. Moreover, air pollution contributes to climate change, global warming, and acid rain, which damage soil, water, and plants. Solving this problem requires joint efforts. Governments must introduce stricter environmental regulations and encourage the use of renewable energy sources such as solar and wind energy. Every person can also contribute by using public transport, riding a bicycle, or planting trees. Small everyday actions matter when they become a habit. In conclusion, air pollution is a problem that affects us all. Taking care of nature means taking care of our own future. If we want to live in a healthy environment, we must take responsibility starting today.</p>`,
+
+text2:`<h3>Climate Change and Local Water Bodies</h3>
+<p>Near the village of M. Porovets there once were eight reservoirs – small mirrors of water that collected rain and snowmelt, irrigated the fields, and gave life to fish, birds, and people. They were a natural part of the landscape and local memory – places for fishing, walks, and summer afternoons by the water.
+
+Over the last six to seven years, however, the picture has changed noticeably. Most of the reservoirs have dried up, the water levels have dropped drastically, and some of them have become marshy. Where water once shimmered, cracked ground, reeds, and mud can be seen today. This change is not accidental – it is directly related to more frequent periods of drought and the increasingly visible effects of climate change.
+
+These processes were closely monitored and documented by students from the Friends of the Earth club, who have been investigating climate change in the area. As part of their study, they compared photographs from previous years, talked to local residents, and tracked changes in water levels.
+
+Rising average temperatures and the uneven distribution of rainfall lead to a decrease in water reserves. Rainfall is becoming less frequent but more intense, which does not allow the soil and reservoirs to retain enough water for long periods.
+
+The drying up of these reservoirs near M. Porovets is a small but telling example of the broader process of climate transformation. It affects not only nature but also local agriculture, biodiversity, and quality of life.</p>`
+};
+
+function openTextModal(id){document.getElementById("textContent").innerHTML=texts[id]; document.getElementById("textModal").style.display="flex";}
+function closeTextModal(){document.getElementById("textModal").style.display="none";}
+
+// Lightbox
+const images=document.querySelectorAll(".student-work img");
+const lightbox=document.getElementById("lightbox");
+const lightboxImg=document.getElementById("lightbox-img");
+const closeBtn=document.getElementById("closeLightbox");
+
+images.forEach(img=>{img.addEventListener("click",()=>{lightbox.classList.add("active"); lightboxImg.src=img.src;});});
+closeBtn.onclick=()=>{lightbox.classList.remove("active");};
+lightbox.onclick=(e)=>{if(e.target!==lightboxImg){lightbox.classList.remove("active");}};
+</script>
+
+</body>
+</html>
